@@ -11,3 +11,21 @@ class DoctorReg(models.Model):
     def __str__(self):
         return self.user.username
         
+class Doctor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    department = models.CharField(max_length=255)
+    description = models.TextField()
+    profile_image = models.ImageField(upload_to='doctor_profiles/')
+
+class ProductRecommendation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product_name = models.CharField(max_length=255)
+    product_href = models.URLField()
+    notable_effects = models.TextField()
+    doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True, blank=True)
+    status_choices = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+    status = models.CharField(max_length=10, choices=status_choices, default='pending')

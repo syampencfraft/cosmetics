@@ -9,6 +9,7 @@ from .models import UserProfile
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from .models import Product, Cart
+from doctors.models import Doctor,ProductRecommendation
 # Create your views here.
 
 
@@ -123,6 +124,8 @@ skincare = pd.read_csv('./export_skincare.csv')
 
 # Function to get skincare recommendations based on skin type
 def skincare_by_skin_type(skin_type, k=5):
+    if not skin_type:  # Check if skin_type is None or empty
+        return []
     skin_type = skin_type.capitalize()
     
     if skin_type not in skincare.columns:
@@ -135,13 +138,31 @@ def skincare_by_skin_type(skin_type, k=5):
 
 
 
+@login_required
 def skincare_recommendation_view(request):
     recommendations = None
-    
+    doctors = Doctor.objects.all()
+
     if request.method == 'POST':
-        skin_type = request.POST.get('skin_type')
+        skin_type = request.POST.get('skin_type', '').strip()
         num_products = int(request.POST.get('num_products', 5))
         recommendations = skincare_by_skin_type(skin_type, num_products)
 
-    return render(request, 'users/skincare.html', {'recommendations': recommendations})
+        if 'send_to_doctor' in request.POST:
+            product_name = request.POST.get('product_name')
+            product_href = request.POST.get('product_href')
+            notable_effects = request.POST.get('notable_effects')
+            doctor_id = request.POST.get('doctor_id')
+
+            doctor = Doctor.objects.get(id=doctor_id)
+            ProductRecommendation.objects.create(
+                user=request.user,
+                product_name=product_name,
+                product_href=product_href,
+                notable_effects=notable_effects,
+                doctor=doctor
+            )
+            return redirect('skincare_recommendation')
+
+    return render(request, 'users/skincare.html', {'recommendations': recommendations, 'doctors': doctors})
 

@@ -1,0 +1,33 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Pending Product Approvals</h2>
+
+    {% if pending_requests %}
+        <div class="row">
+            {% for request in pending_requests %}
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ request.product_name }}</h5>
+                            <p class="card-text"><strong>Notable Effects:</strong> {{ request.notable_effects }}</p>
+                            <a href="{{ request.product_href }}" target="_blank" class="btn btn-info btn-sm">View Product</a>
+
+                            <form method="post" class="mt-3 d-inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="recommendation_id" value="{{ request.id }}">
+                                <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">Approve</button>
+                                <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">Reject</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">No pending approvals.</div>
+    {% endif %}
+</div>
+{% endblock %}

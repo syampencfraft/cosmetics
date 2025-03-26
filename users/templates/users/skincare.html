@@ -27,17 +27,31 @@
         <h3 class="mt-5">Recommended Products</h3>
         <div class="list-group mt-3">
             {% for product in recommendations %}
-            <div class="list-group-item">
-                <h5 class="mb-1">
-                    <a href="{{ product.product_href }}" target="_blank" class="text-decoration-none">
-                        {{ product.product_name }}
-                    </a>
-                </h5>
-                <p class="mb-0"><strong>Notable Effects:</strong> {{ product.notable_effects }}</p>
-            </div>
-        {% endfor %}
+                <div class="list-group-item">
+                    <h5 class="mb-1">{{ product.product_name }}</h5>
+                    <p class="mb-0"><strong>Notable Effects:</strong> {{ product.notable_effects }}</p>
+                    <a href="{{ product.product_href }}" target="_blank" class="btn btn-info btn-sm mt-2">View Product</a>
+                    
+                    <form method="post" class="mt-2">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_name" value="{{ product.product_name }}">
+                        <input type="hidden" name="product_href" value="{{ product.product_href }}">
+                        <input type="hidden" name="notable_effects" value="{{ product.notable_effects }}">
+
+                        <label for="doctor_id">Select Doctor:</label>
+                        <select name="doctor_id" required>
+                            {% for doctor in doctors %}
+                                <option value="{{ doctor.id }}">{{ doctor.user.username }}</option>
+                            {% endfor %}
+                        </select>
+                        
+                        <button type="submit" name="send_to_doctor" class="btn btn-success btn-sm">Send to Doctor</button>
+                    </form>
+                </div>
+            {% endfor %}
         </div>
         {% endif %}
+
     </div>
     
 {% endblock %}
