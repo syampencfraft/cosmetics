@@ -1,0 +1,16 @@
+{% extends './base.html' %}
+
+{% block content %}
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="text-center">
+        <h2>{{ product.name }}</h2>
+        <img src="{{ product.image.url }}" class="img-fluid rounded" style="width: 300px; max-height: 400px; object-fit: contain;" alt="{{ product.name }}">
+        <p><strong>Price:</strong> ${{ product.price }}</p>
+        <p><strong>Description:</strong> {{ product.description }}</p>
+
+        <a href="{% url 'add_to_cart' product.id %}" class="btn btn-success mt-3">
+            <i class="bi bi-cart-plus"></i> Add to Cart
+        </a>
+    </div>
+</div>
+{% endblock %}

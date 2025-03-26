@@ -1,0 +1,43 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Find Skincare Products for Your Skin Type</h2>
+
+        <form method="post" class="p-4 bg-white shadow rounded">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="skin_type" class="form-label">Enter Your Skin Type:</label>
+                <input type="text" id="skin_type" name="skin_type" class="form-control" placeholder="e.g., Dry, Oily, Combination" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="num_products" class="form-label">Number of Products:</label>
+                <input type="number" id="num_products" name="num_products" class="form-control" value="0" min="1" max="20" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Get Recommendations</button>
+        </form>
+
+        {% if recommendations %}
+        <h3 class="mt-5">Recommended Products</h3>
+        <div class="list-group mt-3">
+            {% for product in recommendations %}
+            <div class="list-group-item">
+                <h5 class="mb-1">
+                    <a href="{{ product.product_href }}" target="_blank" class="text-decoration-none">
+                        {{ product.product_name }}
+                    </a>
+                </h5>
+                <p class="mb-0"><strong>Notable Effects:</strong> {{ product.notable_effects }}</p>
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    
+{% endblock %}

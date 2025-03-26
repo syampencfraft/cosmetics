@@ -1,0 +1,309 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>Enhance Your Beauty <span class="d-block">With Premium Cosmetics</span></h1>
+                    <p class="mb-4">Discover luxurious skincare and makeup essentials crafted for a radiant glow. Elevate your beauty routine with high-quality, cruelty-free products.</p>
+                    <p><a href="#" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Learn More</a></p>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="hero-img-wrap">
+                    <img src="{% static 'images/1.jpg' %}" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+<!-- Start Product Section -->
+<!-- Start Product Section -->
+<div class="product-section">
+    <div class="container">
+        <div class="row">
+
+            <!-- Start Column 1 -->
+
+            <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+                <h2 class="mb-4 section-title">Enhance Your Natural Beauty</h2>
+                <p class="mb-4">Discover premium skincare and makeup essentials crafted with nourishing ingredients. Your beauty, our priority.</p>
+                <p><a href="shop.html" class="btn">Shop Now</a></p>
+            </div> 
+            <!-- End Column 1 -->
+
+            <!-- Start Column 2 -->
+			{% for product in products %}
+
+            <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                <a class="product-item" href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" class="img-fluid product-thumbnail">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    <strong class="product-price">${{ product.price }}</strong>
+
+                    <span class="icon-cross">
+                        <img src="{% static 'images/cross.svg' %}" class="img-fluid">
+                    </span>
+                </a>
+            </div> 
+			{% endfor %}
+
+            <!-- End Column 2 -->
+
+            <!-- Start Column 3 -->
+            {% comment %} <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                <a class="product-item" href="cart.html">
+                    <img src="{% static 'images/serum.png' %}" class="img-fluid product-thumbnail">
+                    <h3 class="product-title">Glow Boost Serum</h3>
+                    <strong class="product-price">$32.00</strong>
+
+                    <span class="icon-cross">
+                        <img src="{% static 'images/cross.svg' %}" class="img-fluid">
+                    </span>
+                </a>
+            </div> {% endcomment %}
+            <!-- End Column 3 -->
+
+            <!-- Start Column 4 -->
+            {% comment %} <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                <a class="product-item" href="cart.html">
+                    <img src="{% static 'images/eyeshadow.png' %}" class="img-fluid product-thumbnail">
+                    <h3 class="product-title">Shimmer Eyeshadow Palette</h3>
+                    <strong class="product-price">$24.00</strong>
+
+                    <span class="icon-cross">
+                        <img src="{% static 'images/cross.svg' %}" class="img-fluid">
+                    </span>
+                </a>
+            </div> {% endcomment %}
+            <!-- End Column 4 -->
+
+            <!-- Start Column 5 -->
+            {% comment %} <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                <a class="product-item" href="cart.html">
+                    <img src="{% static 'images/foundation.png' %}" class="img-fluid product-thumbnail">
+                    <h3 class="product-title">Hydrating Foundation</h3>
+                    <strong class="product-price">$28.00</strong>
+
+                    <span class="icon-cross">
+                        <img src="{% static 'images/cross.svg' %}" class="img-fluid">
+                    </span>
+                </a>
+            </div> {% endcomment %}
+            <!-- End Column 5 -->
+
+            <!-- Start Column 6 -->
+            {% comment %} <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                <a class="product-item" href="cart.html">
+                    <img src="{% static 'images/moisturizer.png' %}" class="img-fluid product-thumbnail">
+                    <h3 class="product-title">Hydrating Moisturizer</h3>
+                    <strong class="product-price">$35.00</strong>
+
+                    <span class="icon-cross">
+                        <img src="{% static 'images/cross.svg' %}" class="img-fluid">
+                    </span>
+                </a>
+            </div> {% endcomment %}
+            <!-- End Column 6 -->
+
+        </div>
+    </div>
+</div>
+<!-- End Product Section -->
+
+<!-- End Product Section -->
+
+		<!-- End Product Section -->
+
+		<!-- Start Why Choose Us Section -->
+		
+		<!-- End Why Choose Us Section -->
+
+		<!-- Start We Help Section -->
+		<!-- Start We Help Section -->
+<div class="we-help-section">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <div class="imgs-grid">
+                    <div class="grid grid-1"><img src="{% static 'images/skbg.jpg' %}" alt="Luxury Skincare"></div>
+                    <div class="grid grid-2"><img src="{% static 'images/skbg2.jpg' %}" alt="Makeup Essentials"></div>
+                    <div class="grid grid-3"><img src="{% static 'images/skbg3.jpg' %}" alt="Glowing Skin"></div>
+                </div>
+            </div>
+            <div class="col-lg-5 ps-lg-5">
+                <h2 class="section-title mb-4">We Help You Glow with Confidence</h2>
+                <p>Our premium skincare and beauty products are designed to nourish, protect, and enhance your natural beauty. Experience radiant skin and long-lasting makeup with our expertly crafted formulas.</p>
+
+                <ul class="list-unstyled custom-list my-4">
+                    <li>Formulated with natural and skin-friendly ingredients</li>
+                    <li>Hydrating and nourishing for all skin types</li>
+                    <li>Lightweight, long-lasting, and cruelty-free</li>
+                    <li>Designed for effortless beauty, every day</li>
+                </ul>
+                <p><a href="#" class="btn">Explore</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End We Help Section -->
+<!-- End We Help Section -->
+
+<!-- Start Popular Product -->
+<div class="popular-product">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+				<div class="product-item-sm d-flex">
+					<div class="thumbnail">
+						<img src="{% static 'images/fd.jpg' %}" alt="Luxury Foundation" class="img-fluid">
+					</div>
+					<div class="pt-3">
+						<h3>Luxury Foundation</h3>
+						<p>Experience flawless coverage with our lightweight, long-lasting foundation.</p>
+						<p><a href="#">Read More</a></p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+				<div class="product-item-sm d-flex">
+					<div class="thumbnail">
+						<img src="{% static 'images/lp22.jpg' %}" alt="Matte Lipstick" class="img-fluid">
+					</div>
+					<div class="pt-3">
+						<h3>Matte Lipstick</h3>
+						<p>Get bold, vibrant lips with our hydrating and smudge-proof matte lipstick.</p>
+						<p><a href="#">Read More</a></p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+				<div class="product-item-sm d-flex">
+					<div class="thumbnail">
+						<img src="{% static 'images/hs.jpg' %}" alt="Hydrating Serum" class="img-fluid">
+					</div>
+					<div class="pt-3">
+						<h3>Hydrating Serum</h3>
+						<p>Boost your skin's radiance with our deeply nourishing and revitalizing serum.</p>
+						<p><a href="#">Read More</a></p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- End Popular Product -->
+
+<!-- Start Testimonial Slider -->
+<div class="testimonial-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mx-auto text-center">
+                <h2 class="section-title">What Our Clients Say</h2>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="testimonial-slider-wrap text-center">
+
+                    <div id="testimonial-nav">
+                        <span class="prev" data-controls="prev"><span class="fa fa-chevron-left"></span></span>
+                        <span class="next" data-controls="next"><span class="fa fa-chevron-right"></span></span>
+                    </div>
+
+                    <div class="testimonial-slider">
+                        
+                        <div class="item">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8 mx-auto">
+
+                                    <div class="testimonial-block text-center">
+                                        <blockquote class="mb-5">
+                                            <p>&ldquo;The GlowUp Serum completely transformed my skin. My complexion has never looked more radiant and fresh!&rdquo;</p>
+                                        </blockquote>
+
+                                        <div class="author-info">
+                                            <div class="author-pic">
+                                                <img src="{% static 'images/fd.jpg' %}" alt="Emma Watson" class="img-fluid">
+                                            </div>
+                                            <h3 class="font-weight-bold">Emma Watson</h3>
+                                            <span class="position d-block mb-3">Beauty Blogger</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> 
+                        <!-- END item -->
+
+                        <div class="item">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8 mx-auto">
+
+                                    <div class="testimonial-block text-center">
+                                        <blockquote class="mb-5">
+                                            <p>&ldquo;I recommend their products to all my patients — safe, effective, and truly rejuvenating!&rdquo;</p>
+                                        </blockquote>
+
+                                        <div class="author-info">
+                                            <div class="author-pic">
+                                                <img src="{% static 'images/person-2.png' %}" alt="Dr. Sophia Lee" class="img-fluid">
+                                            </div>
+                                            <h3 class="font-weight-bold">Dr. Sophia Lee</h3>
+                                            <span class="position d-block mb-3">Dermatologist</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> 
+                        <!-- END item -->
+
+                        <div class="item">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8 mx-auto">
+
+                                    <div class="testimonial-block text-center">
+                                        <blockquote class="mb-5">
+                                            <p>&ldquo;Absolutely love their skincare range! The results are visible in just a few weeks.&rdquo;</p>
+                                        </blockquote>
+
+                                        <div class="author-info">
+                                            <div class="author-pic">
+                                                <img src="{% static 'images/person-3.png' %}" alt="Lily James" class="img-fluid">
+                                            </div>
+                                            <h3 class="font-weight-bold">Lily James</h3>
+                                            <span class="position d-block mb-3">Model & Influencer</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> 
+                        <!-- END item -->
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+
+
+{% endblock %}
