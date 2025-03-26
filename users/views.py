@@ -166,3 +166,7 @@ def skincare_recommendation_view(request):
 
     return render(request, 'users/skincare.html', {'recommendations': recommendations, 'doctors': doctors})
 
+@login_required
+def user_product_status_view(request):
+    user_recommendations = ProductRecommendation.objects.filter(user=request.user)
+    return render(request, 'users/product_status.html', {'user_recommendations': user_recommendations})

@@ -1,0 +1,47 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Your Product Recommendations</h2>
+
+    {% if user_recommendations %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Notable Effects</th>
+                        <th>Doctor</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recommendation in user_recommendations %}
+                        <tr>
+                            <td>{{ recommendation.product_name }}</td>
+                            <td>{{ recommendation.notable_effects }}</td>
+                            <td>{{ recommendation.doctor.user.username }}</td>
+                            <td>
+                                {% if recommendation.status == "Approved" %}
+                                    <span class="badge bg-success">Approved</span>
+                                {% elif recommendation.status == "Pending" %}
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Rejected</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ recommendation.product_href }}" target="_blank" class="btn btn-info btn-sm">View Product</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">No product recommendations found.</div>
+    {% endif %}
+</div>
+{% endblock %}
