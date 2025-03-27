@@ -44,14 +44,14 @@
                         <li class="nav-item ">
 							<a class="nav-link" href="{% url 'user_product_status_view' %}">Status</a>
 						</li>
-                        
-						<li><a class="nav-link" href="">About us</a></li>
-						
-						<li><a class="nav-link" href="">Contact us</a></li>
+						<li><a class="nav-link" href="{% url 'about' %}">About us</a></li>
+						<li><a class="nav-link" href="{% url 'contact' %}">Contact us</a></li>
                         <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
 						<li><a class="nav-link" href="{% url 'cart' %}"><img src="{% static 'images/cart.svg' %}"></a></li>
 
                         {% else %}
+                        <li><a class="nav-link" href="{% url 'about' %}">About us</a></li>
+						<li><a class="nav-link" href="{% url 'contact' %}">Contact us</a></li>
                         <li><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                         <li><a class="nav-link" href="{% url 'register' %}">Dr_signup</a></li>
 						<li><a class="nav-link" href="{% url 'user_register' %}">sign up</a></li>

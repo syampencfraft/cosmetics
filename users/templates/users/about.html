@@ -1,0 +1,61 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block title %}
+    About Us
+{% endblock %}
+
+{% block content %}
+		
+		<!-- Start Hero Section -->
+		<div class="hero">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-5">
+						<div class="intro-excerpt">
+							<h1>About Us</h1>
+							<p class="mb-4">Welcome to our world of beauty! We are dedicated to providing high-quality cosmetic products that enhance your natural glow. Our mission is to bring you skincare and beauty solutions that are safe, effective, and tailored to your needs.</p>
+							<p><a href="#" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Learn More</a></p>
+						</div>
+					</div>
+					<div class="col-lg-7">
+						<div class="hero-img-wrap">
+							<img src="{% static 'images/cosmetics_banner.jpg' %}" class="img-fluid" alt="Cosmetic Products">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Hero Section -->
+
+		<!-- Our Story Section -->
+		<div class="container py-5">
+			<div class="row">
+				<div class="col-lg-6">
+					{% comment %} <img src="{% static 'images/our_story.jpg' %}" class="img-fluid rounded" alt="Our Story"> {% endcomment %}
+				</div>
+				<div class="col-lg-6">
+					<h2>Our Story</h2>
+					<p>Founded with a passion for beauty and wellness, our brand aims to redefine skincare and cosmetics. We believe in using natural ingredients, cruelty-free formulations, and scientifically backed innovations to create products that you can trust.</p>
+					<p>Join us on our journey to celebrate beauty in all its forms.</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Our Story Section -->
+
+		<!-- Commitment Section -->
+		<div class="container py-5">
+			<div class="row">
+				<div class="col-lg-6">
+					<h2>Our Commitment</h2>
+					<p>We are committed to sustainability and ethical beauty. Our products are carefully crafted with eco-friendly packaging, non-toxic ingredients, and a dedication to reducing our environmental footprint.</p>
+					<p>We strive to empower individuals by providing beauty solutions that cater to all skin types and tones.</p>
+				</div>
+				<div class="col-lg-6">
+					{% comment %} <img src="{% static 'images/commitment.jpg' %}" class="img-fluid rounded" alt="Our Commitment"> {% endcomment %}
+				</div>
+			</div>
+		</div>
+		<!-- End Commitment Section -->
+
+{% endblock %}

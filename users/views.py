@@ -13,6 +13,15 @@ from doctors.models import Doctor,ProductRecommendation
 # Create your views here.
 
 
+
+def about(request):
+    return render(request,'about,html')
+
+
+def contact(request):
+    return render(request,'contact,html')
+
+
 def register_user(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -170,3 +179,9 @@ def skincare_recommendation_view(request):
 def user_product_status_view(request):
     user_recommendations = ProductRecommendation.objects.filter(user=request.user)
     return render(request, 'users/product_status.html', {'user_recommendations': user_recommendations})
+
+def about_page(request):
+    return render(request, 'users/about.html')
+
+def contact_page(request):
+    return render(request, 'users/contact.html')
