@@ -23,9 +23,16 @@ class ProductRecommendation(models.Model):
     product_href = models.URLField()
     notable_effects = models.TextField()
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True, blank=True)
+
+    message = models.TextField(blank=True, null=True) 
+    image = models.ImageField(upload_to='recommendation_images/', blank=True, null=True) 
+
     status_choices = [
         ('pending', 'Pending'),
         ('approved', 'Approved'),
         ('rejected', 'Rejected'),
     ]
     status = models.CharField(max_length=10, choices=status_choices, default='pending')
+
+    def __str__(self):
+        return f"{self.product_name} - {self.status}"

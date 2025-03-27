@@ -13,6 +13,8 @@
                         <th>Product Name</th>
                         <th>Notable Effects</th>
                         <th>Doctor</th>
+                        <th>Message</th>
+                        <th>Image</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -23,10 +25,18 @@
                             <td>{{ recommendation.product_name }}</td>
                             <td>{{ recommendation.notable_effects }}</td>
                             <td>{{ recommendation.doctor.user.username }}</td>
+                            <td>{{ recommendation.message|default:"No message" }}</td>
                             <td>
-                                {% if recommendation.status == "Approved" %}
+                                {% if recommendation.image %}
+                                    <img src="{{ recommendation.image.url }}" alt="Uploaded Image" class="img-thumbnail" width="80">
+                                {% else %}
+                                    No image
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if recommendation.status == "approved" %}
                                     <span class="badge bg-success">Approved</span>
-                                {% elif recommendation.status == "Pending" %}
+                                {% elif recommendation.status == "pending" %}
                                     <span class="badge bg-warning text-dark">Pending</span>
                                 {% else %}
                                     <span class="badge bg-danger">Rejected</span>

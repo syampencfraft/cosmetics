@@ -162,6 +162,8 @@ def skincare_recommendation_view(request):
             product_href = request.POST.get('product_href')
             notable_effects = request.POST.get('notable_effects')
             doctor_id = request.POST.get('doctor_id')
+            message = request.POST.get('message', '').strip()
+            image = request.FILES.get('image')
 
             doctor = Doctor.objects.get(id=doctor_id)
             ProductRecommendation.objects.create(
@@ -169,7 +171,9 @@ def skincare_recommendation_view(request):
                 product_name=product_name,
                 product_href=product_href,
                 notable_effects=notable_effects,
-                doctor=doctor
+                doctor=doctor,
+                message=message,
+                image=image
             )
             return redirect('skincare_recommendation')
 

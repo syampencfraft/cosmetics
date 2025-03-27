@@ -15,6 +15,17 @@
                             <p class="card-text"><strong>Notable Effects:</strong> {{ request.notable_effects }}</p>
                             <a href="{{ request.product_href }}" target="_blank" class="btn btn-info btn-sm">View Product</a>
 
+                            {% if request.message %}
+                                <p class="mt-2"><strong>Message from User:</strong> {{ request.message }}</p>
+                            {% endif %}
+
+                            {% if request.image %}
+                                <div class="mt-2">
+                                    <strong>Attached Image:</strong><br>
+                                    <img src="{{ request.image.url }}" class="img-fluid rounded" alt="Uploaded Image">
+                                </div>
+                            {% endif %}
+
                             <form method="post" class="mt-3 d-inline">
                                 {% csrf_token %}
                                 <input type="hidden" name="recommendation_id" value="{{ request.id }}">
