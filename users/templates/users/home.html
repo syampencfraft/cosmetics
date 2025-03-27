@@ -38,6 +38,10 @@
                 <h2 class="mb-4 section-title">Enhance Your Natural Beauty</h2>
                 <p class="mb-4">Discover premium skincare and makeup essentials crafted with nourishing ingredients. Your beauty, our priority.</p>
                 <p><a href="shop.html" class="btn">Shop Now</a></p>
+                <form method="GET" action="{% url 'user_home' %}" class="mb-4">
+                    <input type="text" name="q" class="form-control" placeholder="Search products..." value="{{ request.GET.q }}">
+                    <button type="submit" class="btn btn-primary mt-2">Search</button>
+                </form>
             </div> 
             <!-- End Column 1 -->
 

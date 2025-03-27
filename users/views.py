@@ -75,8 +75,12 @@ def register_user(request):
 @login_required
 @never_cache
 def user_home_page(request):
-    products = Product.objects.all() 
-    return render(request, 'users/home.html', {'products':products})
+    query = request.GET.get('q', '')
+    if query:
+        products = Product.objects.filter(name__icontains=query)
+    else:
+        products = Product.objects.all()
+    return render(request, 'users/home.html', {'products': products, 'query': query})
 
 @login_required
 @never_cache
