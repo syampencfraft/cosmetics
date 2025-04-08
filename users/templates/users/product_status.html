@@ -14,6 +14,7 @@
                         <th>Notable Effects</th>
                         <th>Doctor</th>
                         <th>Message</th>
+                        <th>Doctor's Reply</th>
                         <th>Image</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -26,6 +27,7 @@
                             <td>{{ recommendation.notable_effects }}</td>
                             <td>{{ recommendation.doctor.user.username }}</td>
                             <td>{{ recommendation.message|default:"No message" }}</td>
+                            <td>{{ recommendation.doctor_message|default:"No reply yet" }}</td>
                             <td>
                                 {% if recommendation.image %}
                                     <img src="{{ recommendation.image.url }}" alt="Uploaded Image" class="img-thumbnail" width="80">

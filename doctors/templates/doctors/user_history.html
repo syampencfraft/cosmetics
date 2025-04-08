@@ -1,0 +1,57 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block content %}
+<td>{{ request.created_at|date:"Y-m-d H:i" }}</td>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">User Request History</h2>
+
+    {% if user_requests %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>User</th>
+                    <th>Product Name</th>
+                    <th>Message</th>
+                    <th>Skin Condition</th>
+                    <th>Image</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in user_requests %}
+                <tr>
+                    <td>{{ request.user.username }}</td>
+                    <td>{{ request.product_name }}</td>
+                    <td>{{ request.message|default:"No message" }}</td>
+                    <td>{{ request.extra_message|default:"No details" }}</td>
+                    <td>
+                        {% if request.image %}
+                            <img src="{{ request.image.url }}" alt="Uploaded Image" class="img-thumbnail" width="80">
+                        {% else %}
+                            No image
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if request.status == "approved" %}
+                            <span class="badge bg-success">Approved</span>
+                        {% elif request.status == "pending" %}
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        {% else %}
+                            <span class="badge bg-danger">Rejected</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ request.created_at|date:"Y-m-d H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center">No user requests found.</div>
+    {% endif %}
+</div>
+{% endblock %}

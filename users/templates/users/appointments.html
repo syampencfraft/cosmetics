@@ -1,0 +1,46 @@
+{% extends './base.html' %}
+{% block content %}
+
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Your Appointments</h2>
+
+    {% if user_bookings %}
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Doctor</th>
+                    <th>Appointment Date</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in user_bookings %}
+                    <tr>
+                        <td>{{ booking.doctor.user.username }}</td>
+                        <td>{{ booking.appointment_date }}</td>
+                        <td>{{ booking.reason }}</td>
+                        <td>
+                            {% if booking.status == 'pending' %}
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            {% elif booking.status == 'approved' %}
+                                <span class="badge bg-success">Approved</span>
+                            {% else %}
+                                <span class="badge bg-danger">Rejected</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info text-center">No bookings found.</div>
+    {% endif %}
+</div>
+{% endblock %}

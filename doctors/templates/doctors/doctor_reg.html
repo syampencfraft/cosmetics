@@ -35,19 +35,59 @@
             
             <div class="mb-3">
                 <label for="image" class="form-label">Profile Image</label>
-                <input type="file" class="form-control" name="image" required>
+                <input type="file" class="form-control" name="image" accept="image/*" required>
             </div>
+            
             
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" required>
+                <div class="input-group">
+                    <input type="password" id="doctor_password" class="form-control" name="password" required>
+                    <button type="button" class="btn" onclick="togglePassword('doctor_password', 'toggleIcon1')" 
+                        style="background-color: white; border: 1px solid #ced4da;">
+                        <span id="toggleIcon1">👁️</span>
+                    </button>
+                </div>
                 {% if errors.password %}<p class="text-danger">{{ errors.password }}</p>{% endif %}
             </div>
             
             <div class="mb-3">
                 <label for="confirm_password" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" name="confirm_password" required>
+                <div class="input-group">
+                    <input type="password" id="doctor_confirm_password" class="form-control" name="confirm_password" required>
+                    <button type="button" class="btn" onclick="togglePassword('doctor_confirm_password', 'toggleIcon2')" 
+                        style="background-color: white; border: 1px solid #ced4da;">
+                        <span id="toggleIcon2">👁️</span>
+                    </button>
+                </div>
             </div>
+            
+            <script>
+                function togglePassword(inputId, iconId) {
+                    var passwordField = document.getElementById(inputId);
+                    if (passwordField.type === "password") {
+                        passwordField.type = "text";
+                    } else {
+                        passwordField.type = "password";
+                    }
+                }
+            </script>
+            
+            
+            {% comment %} <script>
+                function togglePassword(fieldId, iconId) {
+                    var passwordField = document.getElementById(fieldId);
+                    var icon = document.getElementById(iconId);
+                    if (passwordField.type === "password") {
+                        passwordField.type = "text";
+                        icon.innerHTML = "🙈"; // Closed eye icon
+                    } else {
+                        passwordField.type = "password";
+                        icon.innerHTML = "👁️"; // Open eye icon
+                    }
+                }
+            </script>
+             {% endcomment %}
             
             <button type="submit" class="btn btn-primary w-100">Register</button>
         </form>

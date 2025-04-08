@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import DoctorReg
+# from .models import DoctorReg
 from accounts.models import User
 from users.models import UserProfile
 import re
@@ -11,7 +11,16 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from .models import Doctor, ProductRecommendation
+from django.shortcuts import render, get_object_or_404
+from users.models import DoctorBooking  #
+
+
+
 # Create your views here.
+def index(request):
+    return render(request,'doctors/index.html')
+
+
 
 def register_doctor(request):
     if request.method == 'POST':
@@ -47,7 +56,7 @@ def register_doctor(request):
             errors['password'] = "Passwords do not match!"
 
         if errors:
-            return render(request, 'doctors/register.html', {'errors': errors})
+            return render(request, 'doctors/doctor_reg.html', {'errors': errors})
 
        
         user = User.objects.create_user(username=username, email=email, password=password, user_type='doctor')
@@ -88,7 +97,7 @@ def login_view(request):
                 messages.success(request, "Login successful! Welcome to your profile.")
                 return redirect("user_home")
 
-            elif DoctorReg.objects.filter(user=user).exists():  
+            elif Doctor.objects.filter(user=user).exists():  
                 messages.success(request, "Login successful!")
                 return redirect("home_page")
 
@@ -137,4 +146,46 @@ def doctor_dashboard(request):
         return redirect('doctor_dashboard')
 
     return render(request, 'doctors/dashboard.html', {'pending_requests': pending_requests})
+
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import ProductRecommendation
+
+@login_required
+def doctor_user_history_view(request):
+    if not hasattr(request.user, 'doctor'):
+        return render(request, 'doctors/not_authorized.html')
+
+    # Fetch past user requests for the logged-in doctor
+    user_requests = ProductRecommendation.objects.filter(doctor=request.user.doctor).order_by('-created_at')
+
+    return render(request, 'doctors/user_history.html', {'user_requests': user_requests})
+
+
+@login_required
+def doctor_bookings_view(request):
+    try:
+        doctor = Doctor.objects.get(user=request.user)
+    except Doctor.DoesNotExist:
+        messages.error(request, "You are not registered as a doctor.")
+        return redirect('home_page')
+
+    bookings = DoctorBooking.objects.filter(doctor=doctor)
+
+    if request.method == "POST":
+        booking_id = request.POST.get("booking_id")
+        action = request.POST.get("action")
+
+        booking = DoctorBooking.objects.get(id=booking_id)
+
+        if action == "approve":
+            booking.status = "approved"
+        elif action == "reject":
+            booking.status = "rejected"
+        
+        booking.save()
+        return redirect('doctor_bookings')
+
+    return render(request, 'doctors/appointments.html', {'bookings': bookings})
 

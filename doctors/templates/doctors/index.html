@@ -1,0 +1,150 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block content %}
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-5 text-primary">Welcome to Your Ultimate Skincare Destination</h1>
+        <p class="lead">
+            Discover the perfect skincare routine tailored to your unique skin type.  
+            We bring you expert-recommended products designed to nourish, protect,  
+            and enhance your natural beauty. Explore our collection of high-quality,  
+            dermatologist-approved, and cruelty-free skincare solutions.  
+            Let your journey to healthy, glowing skin begin today!  
+        </p>
+    </div>
+    
+
+    <!-- Hero Image -->
+    <div class="text-center mb-4">
+        <img src="{% static 'images/cos6.jpg' %}" class="img-fluid rounded" alt="Skin Care Banner">
+    </div>
+
+    <style>
+        .skin-type-img {
+            height: 300px; /* Adjust height as needed */
+            object-fit: cover; /* Ensures uniform size without distortion */
+            width: 100%; /* Makes all images responsive */
+            border-radius: 10px; /* Smooth rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for uniformity */
+        }
+    </style>
+
+    <!-- Start Why Choose Us Section -->
+    <div class="why-choose-section">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Why Choose Us?</h2>
+                    <p>We offer premium skincare solutions tailored to different skin types, ensuring you achieve healthy, glowing skin with the right products.</p>
+                    <div class="row my-5">
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    <img src="{% static 'images/cos1.jpg' %}" alt="Natural Ingredients" class="img-fluid">
+                                </div>
+                                <h3>Natural Ingredients</h3>
+                                <p>Our products are made with skin-friendly, organic ingredients to nourish and protect your skin.</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    <img src="{% static 'images/cos2.jpg' %}" alt="Personalized Skincare" class="img-fluid">
+                                </div>
+                                <h3>Personalized Skincare</h3>
+                                <p>Find the perfect skincare regimen based on your unique skin type and concerns.</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    <img src="{% static 'images/cos_banner5.jpg' %}" alt="Dermatologist Approved" class="img-fluid">
+                                </div>
+                                <h3>Dermatologist Approved</h3>
+                                <p>Our products are tested and recommended by skincare experts for safe and effective use.</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    <img src="{% static 'images/cos_banner6.jpg' %}" alt="Cruelty-Free" class="img-fluid">
+                                </div>
+                                <h3>Cruelty-Free & Vegan</h3>
+                                <p>We believe in ethical beauty – no animal testing, just pure skincare goodness.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="img-wrap">
+                        <img src="{% static 'images/cos4.jpg' %}" alt="Why Choose Us" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skin Types Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-5 text-primary">Discover Your Skin Type</h1>
+        <p class="lead">Understanding your skin type is the first step towards choosing the best skincare products.</p>
+    </div>
+    <section class="mt-4">
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6 order-md-1">
+                <img src="{% static 'images/normal.jpg' %}" class="img-fluid skin-type-img" alt="Normal Skin">
+            </div>
+            <div class="col-md-6 order-md-2">
+                <h2 class="text-success">Normal Skin</h2>
+                <p>Balanced sebum production and good blood circulation make normal skin neither too oily nor too dry.</p>
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6">
+                <h2 class="text-danger">Oily Skin</h2>
+                <p>Oily skin has a greasy appearance due to excess sebum production, making it prone to acne breakouts.</p>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'images/oily.jpg' %}" class="img-fluid skin-type-img" alt="Oily Skin">
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6 order-md-1">
+                <img src="{% static 'images/dry.jpg' %}" class="img-fluid skin-type-img" alt="Dry Skin">
+            </div>
+            <div class="col-md-6 order-md-2">
+                <h2 class="text-warning">Dry Skin</h2>
+                <p>Characterized by a flaky and rough texture, dry skin can feel tight and sometimes cause irritation.</p>
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6">
+                <h2 class="text-info">Combination Skin</h2>
+                <p>A mix of oily and dry skin, usually with an oily T-zone and dry cheeks.</p>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'images/combination.jpg' %}" class="img-fluid skin-type-img" alt="Combination Skin">
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6 order-md-1">
+                <img src="{% static 'images/sensitive.jpg' %}" class="img-fluid skin-type-img" alt="Sensitive Skin">
+            </div>
+            <div class="col-md-6 order-md-2">
+                <h2 class="text-secondary">Sensitive Skin</h2>
+                <p>If your skin reacts to spicy food and new products, you may have sensitive skin.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

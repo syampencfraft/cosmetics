@@ -1,0 +1,33 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block content %}
+
+<hr>
+<hr>
+<hr>
+<hr>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-4">
+                <h3 class="text-center mb-4">User Profile</h3>
+                <div class="text-center mb-3">
+                    <img src="{{ profile.image.url }}" alt="Profile Image" class="rounded-circle" width="120" height="120">
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Username:</strong> {{ profile.user.username }}</li>
+                    <li class="list-group-item"><strong>Email:</strong> {{ profile.user.email }}</li>
+                    <li class="list-group-item"><strong>Age:</strong> {{ profile.age }}</li>
+                    <li class="list-group-item"><strong>Place:</strong> {{ profile.place }}</li>
+                    <li class="list-group-item"><strong>Contact:</strong> {{ profile.contact_number }}</li>
+                </ul>
+                <div class="text-center mt-4">
+                    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

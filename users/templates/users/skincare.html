@@ -5,56 +5,50 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Find Skincare Products for Your Skin Type</h2>
 
-    <form method="post" enctype="multipart/form-data" class="p-4 bg-white shadow rounded">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="skin_type" class="form-label">Enter Your Skin Type:</label>
-            <input type="text" id="skin_type" name="skin_type" class="form-control" placeholder="e.g., Dry, Oily, Combination" required>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <form method="post" enctype="multipart/form-data" class="p-4 bg-white shadow rounded">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="skin_type" class="form-label">Enter Your Skin Type:</label>
+                    <input type="text" id="skin_type" name="skin_type" class="form-control" placeholder="e.g., Dry, Oily, Combination" required>
+                </div>
+            
+                <div class="mb-3">
+                    <label for="num_products" class="form-label">Number of Products:</label>
+                    <input type="number" id="num_products" name="num_products" class="form-control" value="5" min="1" max="20" required>
+                </div>
+            
+                <button type="submit" class="btn btn-primary w-100">Get Recommendations</button>
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label for="num_products" class="form-label">Number of Products:</label>
-            <input type="number" id="num_products" name="num_products" class="form-control" value="0" min="1" max="20" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary w-100">Get Recommendations</button>
-    </form>
+    </div>
 
     {% if recommendations %}
-    <h3 class="mt-5">Recommended Products</h3>
-    <div class="list-group mt-3">
+    <h3 class="mt-5 text-center">Recommended Products</h3>
+    <div class="row mt-3">
         {% for product in recommendations %}
-            <div class="list-group-item">
-                <h5 class="mb-1">{{ product.product_name }}</h5>
-                <p class="mb-0"><strong>Notable Effects:</strong> {{ product.notable_effects }}</p>
-                <a href="{{ product.product_href }}" target="_blank" class="btn btn-info btn-sm mt-2">View Product</a>
-                
-                <form method="post" enctype="multipart/form-data" class="mt-2">
-                    {% csrf_token %}
-                    <input type="hidden" name="product_name" value="{{ product.product_name }}">
-                    <input type="hidden" name="product_href" value="{{ product.product_href }}">
-                    <input type="hidden" name="notable_effects" value="{{ product.notable_effects }}">
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <!-- Display Image from Dataset -->
+                    {% if product.picture_src %}
+                        <img src="{{ product.picture_src }}" class="img-fluid rounded mb-2" alt="Product Image" style="max-height: 200px;">
+                    {% else %}
+                        <p>No image available</p>
+                    {% endif %}
 
-                    <label for="doctor_id">Select Doctor:</label>
-                    <select name="doctor_id" class="form-select" required>
-                        {% for doctor in doctors %}
-                            <option value="{{ doctor.id }}">{{ doctor.user.username }}</option>
-                        {% endfor %}
-                    </select>
+                    <h5 class="card-title text-primary">{{ product.product_name }}</h5>
+                    <p class="card-text"><strong>Notable Effects:</strong> {{ product.notable_effects }}</p>
+                    <a href="{{ product.product_href }}" target="_blank" class="btn btn-info btn-sm w-100">View Product</a>
 
-                    <div class="mb-2 mt-2">
-                        <label for="message">Message to Doctor:</label>
-                        <textarea name="message" class="form-control" placeholder="Write a message..." required></textarea>
-                    </div>
-
-                    <div class="mb-2">
-                        <label for="image">Upload Image:</label>
-                        <input type="file" name="image" class="form-control" accept="image/*">
-                    </div>
-
-                    <button type="submit" name="send_to_doctor" class="btn btn-success btn-sm">Send to Doctor</button>
-                </form>
+                    <!-- Add to Cart Button -->
+                    <a href="{% url 'add_to_cart' product.product_name product.product_href %}" class="btn btn-success btn-sm w-100 mt-2">
+                        <i class="bi bi-cart-plus"></i> Add to Cart
+                    </a>
+                </div>
             </div>
+        </div>
         {% endfor %}
     </div>
     {% endif %}

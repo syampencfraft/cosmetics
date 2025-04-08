@@ -1,0 +1,42 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block content %}
+<hr>
+<hr>
+<hr>
+<hr>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Meet Our Expert Doctors</h2>
+    
+    <div class="row">
+        {% for doctor in doctors %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg text-center">
+                {% if doctor.profile_image %}
+                    <img src="{{ doctor.profile_image.url }}" class="card-img-top rounded-circle mx-auto mt-3" 
+                         style="height: 150px; width: 150px; object-fit: cover;" alt="{{ doctor.user.username }}">
+                {% else %}
+                    <img src="{% static 'images/default_doctor.png' %}" class="card-img-top rounded-circle mx-auto mt-3" 
+                         style="height: 150px; width: 150px;" alt="Default Doctor">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{ doctor.user.username }}</h5>
+                    <p class="text-muted"><strong>Department:</strong> {{ doctor.department }}</p>
+                    <p class="card-text">{{ doctor.description }}</p>
+                    
+                    <a href="{% url 'book_doctor'  %}" class="btn btn-success btn-sm w-100">Book Appointment</a>
+                    <hr>
+                    <a href="{% url 'user_appointments'  %}" class="btn btn-warning btn-sm w-100">Appoinment status</a>
+
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No doctors available at the moment.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

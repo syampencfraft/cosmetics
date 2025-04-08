@@ -1,0 +1,78 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Recommended Skincare Products</h2>
+
+    {% if recommendations %}
+    <div class="row">
+        {% for product in recommendations %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card border-0 h-100 shadow-sm transition-all hover-shadow-lg">
+                <div class="card-body text-center d-flex flex-column">
+                    {% if product.picture_src %}
+                        <img src="{{ product.picture_src }}" class="img-fluid rounded mb-2" alt="Product Image" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <p>No image available</p>
+                    {% endif %}
+
+                    <h5 class="card-title text-primary">{{ product.product_name }}</h5>
+                    <p class="card-text"><strong>Notable Effects:</strong> {{ product.notable_effects }}</p>
+                    <a href="{{ product.product_href }}" target="_blank" class="btn btn-info btn-sm w-100">View Product</a>
+
+                    <!-- Doctor Recommendation Form -->
+                    <form method="post" enctype="multipart/form-data" class="mt-3">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_name" value="{{ product.product_name }}">
+                        <input type="hidden" name="product_href" value="{{ product.product_href }}">
+                        <input type="hidden" name="notable_effects" value="{{ product.notable_effects }}">
+                        <input type="hidden" name="picture_src" value="{{ product.picture_src }}">
+
+                        <div class="mb-2">
+                            <label for="doctor_id" class="form-label">Select Doctor:</label>
+                            <select name="doctor_id" class="form-select" required>
+                                {% for doctor in doctors %}
+                                    <option value="{{ doctor.id }}">{{ doctor.user.username }}</option>
+                                {% empty %}
+                                    <option disabled>No doctors available</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="message" class="form-label">Message to Doctor:</label>
+                            <textarea name="message" class="form-control" placeholder="Write a message..." required></textarea>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="image" class="form-label">Upload Image:</label>
+                            <input type="file" name="image" class="form-control" accept="image/*">
+                        </div>
+
+                        <button type="submit" name="send_to_doctor" class="btn btn-success btn-sm w-100">Send to Doctor</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p class="text-center">No recommendations found.</p>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{% url 'skincare_recommendation' %}" class="btn btn-secondary">Back to Skincare Selection</a>
+    </div>
+</div>
+
+<!-- Custom CSS -->
+<style>
+    .hover-shadow-lg:hover {
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15) !important;
+        transform: translateY(-5px);
+        transition: all 0.3s ease-in-out;
+    }
+</style>
+
+{% endblock %}
