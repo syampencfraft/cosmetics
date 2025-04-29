@@ -1,7 +1,8 @@
 from django.db import models
-from accounts.models import User
 from doctors.models import Doctor  
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class UserProfile(models.Model):

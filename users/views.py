@@ -32,11 +32,15 @@ def contact(request):
     return render(request,'contact,html')
 
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import UserProfile
+# from .models import UserProfile
+User = get_user_model()
+
 
 def register_user(request):
     if request.method == 'POST':
